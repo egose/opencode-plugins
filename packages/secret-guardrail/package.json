@@ -1,0 +1,30 @@
+{
+  "name": "opencode-secret-guardrail",
+  "version": "0.1.0",
+  "description": "Best-effort secret redaction for OpenCode V2 using a user-installed Gitleaks CLI",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "files": [
+    "src"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/egose/opencode-plugins.git",
+    "directory": "packages/secret-guardrail"
+  },
+  "keywords": [
+    "opencode",
+    "opencode-plugin",
+    "gitleaks",
+    "secrets"
+  ],
+  "scripts": {
+    "typecheck": "tsc --project tsconfig.json",
+    "test": "tsx --test test/*.test.ts"
+  },
+  "dependencies": {
+    "@opencode/plugin": "2.2.7"
+  }
+}

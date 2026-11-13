@@ -1,0 +1,39 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: 3e8a8703264a2f4a69428a0aa4dcb512790b2c8c
+    hooks:
+      - id: check-added-large-files
+      - id: check-case-conflict
+      - id: check-executables-have-shebangs
+        files: \.bash
+      - id: check-json
+        # JSONC files (examples/) contain comments.
+        exclude: \.jsonc$
+      - id: check-vcs-permalinks
+      - id: check-yaml
+      - id: check-ast
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+  - repo: local
+    hooks:
+      - id: prettier
+        name: prettier
+        entry: .bin/prettier.sh
+        language: script
+        pass_filenames: true
+        require_serial: true
+        files: \.(ts|tsx|js|jsx|json|css|scss|md|html)$
+        exclude: .git/COMMIT_EDITMSG
+      - id: commitlint
+        name: commitlint
+        entry: .bin/commitlint.sh
+        language: script
+        verbose: true
+        pass_filenames: false
+        stages: [commit-msg]
+
+exclude: |
+  (?x)^(
+    CHANGELOG\.md |
+    package-lock\.json |
+  )$
