@@ -1,0 +1,8 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  // Install Gitleaks separately and make it available to the OpenCode server.
+  // The revision after "#" can be a branch ("main"), a per-package release tag,
+  // or a full commit SHA (only a full SHA pins the installed revision):
+  // "plugins": ["github:egose/opencode-plugins#secret-guardrail/v0.1.0::path:packages/secret-guardrail"],
+  "plugins": ["github:egose/opencode-plugins#main::path:packages/secret-guardrail"],
+}

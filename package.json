@@ -1,0 +1,38 @@
+{
+  "name": "opencode-plugins",
+  "private": true,
+  "type": "module",
+  "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/egose/opencode-plugins.git"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "typecheck": "npm run typecheck --workspaces",
+    "test": "npm run test --workspaces",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "check": "npm run format:check && npm run typecheck && npm test",
+    "changelog": "node node_modules/@repo-toolkit/changelog/cli.js",
+    "release": "release-it"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "21.2.4",
+    "@commitlint/config-conventional": "21.2.4",
+    "@commitlint/format": "21.2.3",
+    "@release-it/bumper": "8.0.1",
+    "@repo-toolkit/changelog": "0.14.2",
+    "@types/node": "22.20.5",
+    "conventional-commits-filter": "6.0.1",
+    "prettier": "3.6.2",
+    "release-it": "21.1.2",
+    "tsx": "4.23.15",
+    "typescript": "5.9.3"
+  }
+}
