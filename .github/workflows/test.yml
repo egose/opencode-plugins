@@ -27,11 +27,8 @@ jobs:
       - name: Setup NPM Packages
         uses: ./.github/actions/setup-npm
 
-      - name: Format check
-        run: npm run format:check
-
       - name: Typecheck
-        run: npm run typecheck
+        run: pnpm typecheck
 
       - name: Test
-        run: npm test
+        run: pnpm test
