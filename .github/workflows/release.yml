@@ -1,0 +1,42 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - v*.*.*
+
+concurrency:
+  group: release-publication
+  cancel-in-progress: false
+
+jobs:
+  quality:
+    uses: ./.github/workflows/test.yml
+    permissions:
+      contents: read
+
+  validate:
+    needs: quality
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+          fetch-tags: true
+
+      - name: Validate release tag
+        run: ./scripts/validate-release-tag.sh "$GITHUB_REF_NAME"
+
+  release:
+    needs: validate
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    steps:
+      - name: Create GitHub release
+        uses: softprops/action-gh-release@efb35369e0ad2afab669f228072c1b0d510eae64
+        with:
+          generate_release_notes: true

@@ -1,0 +1,38 @@
+name: Check code/commit conventions
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  pre-commit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Setup NPM Packages
+        uses: ./.github/actions/setup-npm
+
+      - name: Install Python tools
+        run: pip install -r requirements.txt
+
+      - name: Run pre-commit
+        uses: egose/actions/pre-commit@71efad841d4b7bb6a479984abacf7111ebd44a16
+        with:
+          config: .pre-commit-config.yaml
+          commit-on-push: true
+          commit-on-pr: false
