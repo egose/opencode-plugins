@@ -21,11 +21,8 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: npm
+      - name: Setup Tools
+        uses: ./.github/actions/setup-tools
 
       - name: Setup NPM Packages
         uses: ./.github/actions/setup-npm
