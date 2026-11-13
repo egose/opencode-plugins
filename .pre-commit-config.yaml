@@ -16,13 +16,14 @@ repos:
       - id: trailing-whitespace
   - repo: local
     hooks:
-      # Single source of formatting truth, matching `npm run format:check` in CI.
       - id: prettier
-        name: prettier --check
-        entry: ./node_modules/.bin/prettier
-        args: ["--check"]
-        language: system
-        types_or: [javascript, jsx, ts, tsx, json, css, html, markdown, yaml]
+        name: prettier
+        entry: .bin/prettier.sh
+        language: script
+        pass_filenames: true
+        require_serial: true
+        files: \.(ts|tsx|js|jsx|json|css|scss|md|html)$
+        exclude: .git/COMMIT_EDITMSG
       - id: commitlint
         name: commitlint
         entry: .bin/commitlint.sh
